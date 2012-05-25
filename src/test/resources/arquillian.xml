@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<arquillian xmlns="http://jboss.org/schema/arquillian" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+   
+   <defaultProtocol type="Servlet 3.0"/>
+
+   <group qualifier="jboss-cluster">
+      <container qualifier="jboss1">
+          <configuration>
+              <property name="jbossHome">node1/jboss-as-${jboss.version:7.1.1.Final}</property>
+              <property name="javaVmArguments">-client -Djboss.node.name=jboss1 -XX:+UseG1GC
+                 -Djboss.socket.binding.port-offset=1000 -Xmx512m
+                 -XX:MaxPermSize=128m</property>
+              <property name="managementPort">10999</property>
+              <property name="serverConfig">ispn.xml</property>
+          </configuration>
+      </container>
+      <container qualifier="jboss2">
+         <configuration>
+            <property name="jbossHome">node2/jboss-as-${jboss.version:7.1.1.Final}</property>
+            <property name="javaVmArguments">-client -Djboss.node.name=jboss2 -XX:+UseG1GC -Djboss.socket.binding.port-offset=2000 -Xmx512m
+               -XX:MaxPermSize=128m</property>
+            <property name="managementPort">11999</property>
+            <property name="serverConfig">ispn.xml</property>
+         </configuration>
+      </container>
+   </group>
+</arquillian>

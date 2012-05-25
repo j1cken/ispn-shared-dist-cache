@@ -1,0 +1,43 @@
+SETUP
+=====
+1. fix datasource connection in ispn.xml
+2. run 'bash run.sh'
+
+
+TEST SCENARIO
+=============
+1.) a cluster of 2 nodes
+2.) key1 is written using jboss1 (key2/jboss2)
+3.) key1 is changed using both servers (if step 2 succeeds)
+
+
+ERROR FLAVORS
+=============
+
+1.) both keys on jboss2: initial entry of key1 did not succeed as the owner is jboss2
+
+Results :
+
+Failed tests:   persistJBoss1(SharedDistCacheTest): key1 was not persisted expected object to not be null
+
+Tests run: 5, Failures: 1, Errors: 0, Skipped: 3
+
+Key distribution:
+node1/jboss-as-7.1.1.Final/standalone/log/server.log:17:21:53,782 TRACE [org.infinispan.interceptors.DistributionInterceptor] (http--127.0.0.1-9080-1) Not doing a remote get for key key1 since entry is mapped to current node (jboss1/mapper-cluster), or is in L1.  Owners are [jboss2/mapper-cluster, jboss1/mapper-cluster]
+node2/jboss-as-7.1.1.Final/standalone/log/server.log:17:21:56,284 TRACE [org.infinispan.interceptors.DistributionInterceptor] (http--127.0.0.1-10080-1) Not doing a remote get for key key2 since entry is mapped to current node (jboss2/mapper-cluster), or is in L1.  Owners are [jboss2/mapper-cluster, jboss1/mapper-cluster]
+
+
+2.) key1 on jboss2, key2 on jboss1: initial entry of key1 did not succeed as the owner is jboss2
+
+Results :
+
+Failed tests:   persistJBoss1(SharedDistCacheTest): key1 was not persisted expected object to not be null
+
+Tests run: 5, Failures: 1, Errors: 0, Skipped: 3
+
+
+Key distribution:
+node1/jboss-as-7.1.1.Final/standalone/log/server.log:17:26:23,889 TRACE [org.infinispan.interceptors.DistributionInterceptor] (http--127.0.0.1-9080-2) Not doing a remote get for key key1 since entry is mapped to current node (jboss1/mapper-cluster), or is in L1.  Owners are [jboss2/mapper-cluster, jboss1/mapper-cluster]
+node2/jboss-as-7.1.1.Final/standalone/log/server.log:17:26:26,566 TRACE [org.infinispan.interceptors.DistributionInterceptor] (http--127.0.0.1-10080-1) Not doing a remote get for key key2 since entry is mapped to current node (jboss2/mapper-cluster), or is in L1.  Owners are [jboss1/mapper-cluster, jboss2/mapper-cluster]
+
+
