@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.example.ispan-shared-dist-cache</groupId>
-  <artifactId>ispan-shared-dist-cache</artifactId>
+  <artifactId>ispn-shared-dist-cache</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <properties>
     <version.junit>4.10</version.junit>
