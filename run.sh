@@ -6,6 +6,6 @@ mvn clean test -PJBOSS_AS_MANAGED_7.X
 
 echo
 echo "Key distribution:"
-grep Owner node?/jboss-as-7.1.1.Final/standalone/log/server.log
+grep -i owner node?/jboss-as-7.1.1.Final/standalone/log/server.log
 exit 0
 
